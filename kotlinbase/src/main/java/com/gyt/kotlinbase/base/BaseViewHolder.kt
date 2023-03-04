@@ -6,9 +6,7 @@ import android.widget.TextView
 import androidx.annotation.IdRes
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 
-abstract class BaseViewHolder : ViewHolder {
-
-    constructor(itemView: View) : super(itemView)
+abstract class BaseViewHolder(itemView: View) : ViewHolder(itemView) {
 
     @SuppressLint("UserSpaseArrays")
     val viewHashMap = HashMap<Int, View>()

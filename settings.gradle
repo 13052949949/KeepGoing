@@ -29,3 +29,4 @@ rootProject.name = "KeepGoing"
 include ':app'
 include ':base'
 include ':kotlinbase'
+include ':utils'

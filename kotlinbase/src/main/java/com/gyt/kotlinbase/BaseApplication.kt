@@ -12,11 +12,9 @@ class BaseApplication:Application() {
 
 
     companion object{
-        private lateinit var currentApplication: Context
 
-        fun currentApplication():Context{
-            return currentApplication
-        }
+        @get:JvmName("getApplicationContext")
+        lateinit var currentApplication: Context
     }
 
 }

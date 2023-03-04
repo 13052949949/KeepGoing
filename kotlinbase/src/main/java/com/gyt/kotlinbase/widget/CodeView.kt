@@ -12,30 +12,17 @@ import com.gyt.kotlinbase.R
 import com.gyt.kotlinbase.utils.dp2px
 import java.util.*
 
-class CodeView : AppCompatTextView {
 
-    constructor(context: Context) : this(context, null)
+class CodeView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null): AppCompatTextView(context,attrs){
 
-    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
-
-        setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18f)
-        gravity = Gravity.CENTER
-        setBackgroundColor(context.getColor(R.color.colorPrimary))
-        setTextColor(Color.WHITE)
-
-        paint.isAntiAlias = true
-        paint.style = Paint.Style.STROKE
-        paint.color = context.getColor(R.color.colorAccent)
-        paint.strokeWidth = dp2px(6f)
-
-        updateCode()
+    private val paint = Paint().apply {
+        isAntiAlias = true
+        style = Paint.Style.STROKE
+        color = context.getColor(R.color.colorAccent)
+        strokeWidth = dp2px(6f)
     }
 
-
-    val paint = Paint()
-
-
-    val codeList = arrayOf(
+    private val codeList = arrayOf(
         "kotlin",
         "android",
         "java",
@@ -45,6 +32,15 @@ class CodeView : AppCompatTextView {
         "retrofit",
         "tcp/ip"
     )
+
+     init{
+        setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18f)
+        gravity = Gravity.CENTER
+        setBackgroundColor(context.getColor(R.color.colorPrimary))
+        setTextColor(Color.WHITE)
+
+        updateCode()
+    }
 
 
     fun updateCode() {

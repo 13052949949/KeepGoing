@@ -1,13 +1,7 @@
 package com.gyt.kotlinbase.entity
 
-class User {
+data class User constructor(var username: String?, var password: String?, var code: String?){
 
-    var username: String? = null
-    var password: String? = null
-    var code: String? = null
-
-    constructor()
-
-    constructor(username: String?, password: String?, code: String?)
+    constructor():this(null,null,null)
 
 }

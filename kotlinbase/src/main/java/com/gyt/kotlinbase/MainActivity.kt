@@ -18,9 +18,9 @@ class MainActivity : AppCompatActivity(), OnClickListener {
     private val usernameKey = "username"
     private val passwordKey = "password"
 
-    private var et_username: EditText? = null
-    private var et_password: EditText? = null
-    private var et_code: EditText? = null
+    lateinit var et_username: EditText
+    lateinit var et_password: EditText
+    lateinit var et_code: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,8 +30,8 @@ class MainActivity : AppCompatActivity(), OnClickListener {
         et_password = findViewById(R.id.et_password)
         et_code = findViewById(R.id.et_code)
 
-        et_username?.setText(CacheUtils.get(usernameKey))
-        et_password?.setText(CacheUtils.get(passwordKey))
+        et_username.setText(CacheUtils.get(usernameKey))
+        et_password.setText(CacheUtils.get(passwordKey))
 
         val bt_login = findViewById<Button>(R.id.btn_login)
         val img_code = findViewById<CodeView>(R.id.code_view)
@@ -50,9 +50,9 @@ class MainActivity : AppCompatActivity(), OnClickListener {
     }
 
     private fun login() {
-        val username = et_username?.text.toString()
-        val passsword = et_password?.text.toString()
-        val code = et_code?.text.toString()
+        val username = et_username.text.toString()
+        val passsword = et_password.text.toString()
+        val code = et_code.text.toString()
 
         val user = User(username, passwordKey, code)
         if (verify(user)) {
@@ -60,15 +60,14 @@ class MainActivity : AppCompatActivity(), OnClickListener {
             CacheUtils.save(passwordKey, passsword)
             startActivity(Intent(this, LessonActivity::class.java))
         }
-
     }
 
     private fun verify(user: User): Boolean {
-        if (user.username != null && user.username !!.length < 4) {
+        if ((user.username?.length ?: 0) < 4) {
             toast("用戶名不合法")
             return false
         }
-        if (user.password != null && user.password !!.length < 4) {
+        if ((user.password?.length ?: 0) < 4){
             toast("密碼不合法")
             return false
         }

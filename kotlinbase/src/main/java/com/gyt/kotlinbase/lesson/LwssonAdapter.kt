@@ -44,15 +44,11 @@ class LessonAdapter : RecyclerView.Adapter<LessonAdapter.LessonViewHolder>() {
                 setText(R.id.tv_state, state.stateName())
                 var colorRes: Int = R.color.playback
                 colorRes = when (state) {
-                    Lesson.State.PLAYBACK -> {
-
-                        // 即使在 {} 中也是需要 break 的。
-                        R.color.playback
-                    }
+                    Lesson.State.PLAYBACK -> R.color.playback
                     Lesson.State.LIVE -> R.color.live
                     Lesson.State.WAIT -> R.color.wait
                 }
-                val backgroundColor: Int = itemView.getContext().getColor(colorRes)
+                val backgroundColor: Int = itemView.context.getColor(colorRes)
                 (getView(R.id.tv_state) as TextView).setBackgroundColor(backgroundColor)
             }
         }

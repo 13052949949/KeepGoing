@@ -17,7 +17,7 @@ class LessonPresenter(activity: LessonActivity) {
     }
 
     fun fetchData() {
-        HttpClient.INSTANCE.get(LESSON_PATH, type, object : EntityCallback<List<Lesson>> {
+        HttpClient.get(LESSON_PATH, type, object : EntityCallback<List<Lesson>> {
             override fun onSuccess(entity: List<Lesson>) {
                 this@LessonPresenter.lessons = entity
                 activity.runOnUiThread { activity.showResult(lessons) }
@@ -31,13 +31,7 @@ class LessonPresenter(activity: LessonActivity) {
     }
 
     fun showPlayback() {
-        val playbackLessons: MutableList<Lesson> = ArrayList()
-        for (lesson in lessons) {
-            if (lesson.state === Lesson.State.PLAYBACK) {
-                playbackLessons.add(lesson)
-            }
-        }
-        activity.showResult(playbackLessons)
+        activity.showResult(lessons.filter { it.state === Lesson.State.PLAYBACK })
     }
 
     companion object {
